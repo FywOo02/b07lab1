@@ -10,9 +10,26 @@ public class Polynomial {
     }
 
     public Polynomial add(Polynomial input){
-        double[] result = new double[this.coe.length+input.coe.length];
+        double[] longer;
+        if(this.coe.length > input.coe.length){
+            longer = this.coe;
+        }else {
+            longer = input.coe;
+        }
 
-        int count = 0;
+        double[] result = new double[(this.coe.length>input.coe.length) ? this.coe.length : input.coe.length];
+        int index =(this.coe.length<input.coe.length) ? this.coe.length : input.coe.length;
+
+        for(int i=0; i<result.length; i++){
+            if(index != 0){
+                result[i] = this.coe[i] + input.coe[i];
+            }else{
+                result[i] = longer[i];
+            }
+            index--;
+        }
+
+        /*int count = 0;
         int index = 0;
         while(count < this.coe.length){
             result[index] = this.coe[count];
@@ -25,13 +42,24 @@ public class Polynomial {
             index++;
             count++;
         }
+
+         */
+
         return new Polynomial(result);
     }
 
     public double evaluate(double x){
         double result = 0;
+        double temp_result = 1;
+
         for(int count = 0; count < this.coe.length; count++){
-            result += this.coe[count] * Math.pow(x,count);
+            temp_result = 1;
+            int temp_count = count;
+            while(temp_count != 0){
+                temp_result *= x;
+                temp_count --;
+            }
+            result += this.coe[count] * temp_result;
         }
         return result;
     }
