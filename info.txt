@@ -1,0 +1,3 @@
+My name is Shenzhe Zhu
+This is the week1 Lab of CSCB07.
+The Lab requires us to write a class that called Polynomial which implements lots math related functions.
